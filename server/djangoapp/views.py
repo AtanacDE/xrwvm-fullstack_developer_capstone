@@ -17,7 +17,8 @@ from .populate import initiate
 
 from .models import CarMake, CarModel
 
-from .restapis import get_request, analyze_review_sentiments, searchcars_request
+from .restapis import get_request, analyze_review_sentiments
+from .restapis import searchcars_request
 # from .restapis import post_review
 
 # Get an instance of a logger
@@ -167,6 +168,7 @@ def add_review(request):
     else:
         return JsonResponse({"status": 403, "message": "Unauthorized"})
 
+
 # Code for the view
 def get_inventory(request, dealer_id):
     data = request.GET
@@ -183,7 +185,7 @@ def get_inventory(request, dealer_id):
             endpoint = "/carsbyprice/"+str(dealer_id)+"/"+data['price']
         else:
             endpoint = "/cars/"+str(dealer_id)
- 
+
         cars = searchcars_request(endpoint)
         return JsonResponse({"status": 200, "cars": cars})
     else:
